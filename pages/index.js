@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import {ethers} from 'ethers';
 import * as Constans from '../Utils/config';
 
+
+
+
+
 export default function Home() {
+
+  const [tasks, setTasks] = useState("");
 
   useEffect(() => {
 
@@ -22,13 +28,22 @@ export default function Home() {
     connectToMetaMask();
   }, []);
 
+  const handleSubmit = async event => {
+    event.preventDefault();
+  }
+
+  const handleChange = async event  => {
+    event.preventDefault();
+    setTasks(event.target.value);
+  }
 
   return (
     <div className="flex flex-col  items-center justify-center">
       <div className=" text-5xl font-bold py-10">
         Welcome to decenteralize To-do App 
       </div>
-        <form className="w-full max-w-sm">
+
+        <form onSubmit={handleSubmit} className="w-full max-w-sm">
           <div className="flex items-center border-b border-teal-500 py-2">
             <input className="appearance-none 
                               bg-transparent 
@@ -38,8 +53,12 @@ export default function Home() {
                               mr-3 py-1 px-2 
                               leading-tight 
                               focus:outline-none" 
-                              type="text" 
-                              aria-label="Full name" />
+                              aria-label="Full name" 
+                              type="text"  
+                              name="task"
+                              placeholder="Add Task Here ..."
+                              onChange={handleChange}
+                              value={tasks} />
             <button className="flex-shrink-0 
                              bg-teal-500 
                              hover:bg-teal-700 
@@ -58,5 +77,5 @@ export default function Home() {
         </form>
 
     </div>
-  )
-}
+  );
+};
