@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import ethers from 'ethers';
+import {ethers} from 'ethers';
+import * as Constans from '../Utils/config';
 
 export default function Home() {
 
@@ -8,8 +9,8 @@ export default function Home() {
     const connectToMetaMask = async () => {
       try {
           if(window.ethereum){
-            const provider = new ethers.providers.web3Provider(window.ethereum);
-            const signer   = provider.getSigner();
+            const provider = new ethers.BrowserProvider(window.ethereum);
+            const signer   = await provider.getSigner();
             console.log(await signer.getAddress());
           }else{
             console.log("MetaMask not Found!");
@@ -18,7 +19,7 @@ export default function Home() {
         console.log(error); 
       }
     }
-
+    connectToMetaMask();
   }, []);
 
 
