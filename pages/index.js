@@ -8,16 +8,21 @@ import * as Constans from '../Utils/config';
 
 export default function Home() {
 
-  const [tasks, setTasks] = useState("");
+  //const [tasks, setTasks] = useState("");
+  const [tasks, setTask] = useState([]);
 
   useEffect(() => {
 
     const connectToMetaMask = async () => {
       try {
           if(window.ethereum){
-            const provider = new ethers.BrowserProvider(window.ethereum);
+            const provider = new ethers.providers.JsonRpcProvider(`HTTP://127.0.0.1:7545`); ;
             const signer   = await provider.getSigner();
             console.log(await signer.getAddress());
+            const contractInstance = new ethers.Contract(Constans.contractAddress, Constans.contractAbi, signer);
+            var tasks = await contractInstance.getAllTasks();
+            setTasks(tasks)
+            console.log(tasks)
           }else{
             console.log("MetaMask not Found!");
           }
@@ -75,6 +80,37 @@ export default function Home() {
             </button>
           </div>
         </form>
+
+        <div className="py-5"></div>
+        <table className="table-auto w-1/2 ">
+          <thead className=" bg-green-100">
+            <tr>
+              <th>task ID</th>
+              <th>task Describtion</th>
+              <th>task status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Malcolm Lockyer</td>
+              <td>pending</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>The Eagles</td>
+              <td>1972</td>
+              <td>1972</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Earth, Wind, and Fire</td>
+              <td>1975</td>
+              <td>1972</td>
+            </tr>
+          </tbody>
+        </table>
 
     </div>
   );
