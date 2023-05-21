@@ -59,6 +59,10 @@ export default function Home() {
     setTasks(event.target.value);
   }
 
+  const changeTasksStatus = async index => {
+
+  } 
+
   return (
     <div className="flex flex-col  items-center justify-center">
       <div className=" text-5xl font-bold py-10">
@@ -111,7 +115,14 @@ export default function Home() {
               <td>{index}</td>
               <td>{task.desc}</td>
               <td>{task.status === 0 ? "pending" : "finished"}</td>
-              <td>{index}</td>
+              <td>{task.status === 0 ? <button className="flex-shrink-0 
+                             bg-red-500 
+                             hover:bg-red-700 
+                             border-red-500 
+                             hover:border-red-700 
+                             text-sm border-4 
+                             text-white 
+                             py-1 px-2 rounded" onClick={changeTasksStatus(index)}>Click me</button> : null}</td>
             </tr>
             ))}
           </tbody>
