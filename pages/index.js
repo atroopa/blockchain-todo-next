@@ -6,7 +6,7 @@ import * as Constans from '../Utils/config';
 
 
 
-export default function Home() {
+const Home = () => {
 
   const [tasks, setTasks] = useState("");
 
@@ -55,12 +55,28 @@ export default function Home() {
   }
 
   const handleChange = async event  => {
-    event.preventDefault();
+    //event.preventDefault();
     setTasks(event.target.value);
   }
 
-  const changeTasksStatus = async index => {
+  const changeTasksStatus = async taskId => {
+    const response = await fetch('/api/changeStatus', {
+      method: 'POST',
+      headers : {
+        "content-type" : 'application/json'
+      },
+      body: JSON.stringify(taskId)
+    });
 
+
+    if (! response.ok){
+      const error = response.json();
+      console.log(error);
+    }
+
+    const resp = response.json();
+    const status = response.message;
+    console.log("changeTasksStatus: ", status);
   } 
 
   return (
@@ -84,6 +100,7 @@ export default function Home() {
                               name="task"
                               placeholder="Add Task Here ..."
                               onChange={handleChange}
+                              //value={tasks}
                                />
             <input className="flex-shrink-0 
                              bg-teal-500 
@@ -110,19 +127,22 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            {tasks && tasks.length > 0 && tasks.map((task, index) => (
+            {
+            tasks.map((task, index) => (
+              
               <tr key={index}>
-              <td>{index}</td>
-              <td>{task.desc}</td>
-              <td>{task.status === 0 ? "pending" : "finished"}</td>
-              <td>{task.status === 0 ? <button className="flex-shrink-0 
-                             bg-red-500 
-                             hover:bg-red-700 
-                             border-red-500 
-                             hover:border-red-700 
-                             text-sm border-4 
-                             text-white 
-                             py-1 px-2 rounded" onClick={changeTasksStatus(index)}>Click me</button> : null}</td>
+                <td>{index}</td>
+                <td>{task.desc}</td>
+                <td>{task.status === 0 ? "pending" : "finished"}</td>
+                {/* <td>{task.status === 0 ? <button className="flex-shrink-0 
+                              bg-red-500 
+                              hover:bg-red-700 
+                              border-red-500 
+                              hover:border-red-700 
+                              text-sm border-4 
+                              text-white 
+                              py-1 px-2 rounded" onClick={() => changeTasksStatus(index)}>Click me</button> : null}
+                  </td> */}
             </tr>
             ))}
           </tbody>
@@ -131,3 +151,6 @@ export default function Home() {
     </div>
   );
 };
+
+
+export default Home;
