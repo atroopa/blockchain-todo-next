@@ -36,7 +36,7 @@ const Home = () => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    const response = await fetch('/api/addTasks', {
+    const response = await fetch('/api/addTask', {
       method: 'POST',
       headers : {
         "content-type" : 'application/json'
