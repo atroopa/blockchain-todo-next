@@ -80,7 +80,7 @@ export default function Home() {
                               name="task"
                               placeholder="Add Task Here ..."
                               onChange={handleChange}
-                              value={tasks} />
+                               />
             <input className="flex-shrink-0 
                              bg-teal-500 
                              hover:bg-teal-700 
