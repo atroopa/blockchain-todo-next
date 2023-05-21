@@ -36,6 +36,23 @@ export default function Home() {
 
   const handleSubmit = async event => {
     event.preventDefault();
+    const response = await fetch('/api/addTasks', {
+      methos: 'POST',
+      headers : {
+        "content-type" : 'application/json'
+      },
+      body: JSON.stringify(task)
+    });
+
+    if (! response.ok){
+      const error = response.json();
+      console.log(error);
+    }
+
+    const resp = response.json();
+    const status = response.message;
+    console.log("Status: ", status);
+
   }
 
   const handleChange = async event  => {
@@ -75,9 +92,6 @@ export default function Home() {
                              py-1 px-2 rounded" 
                              type="button">
                              add
-            </button>
-            <button className="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded" type="button">
-              remove
             </button>
           </div>
         </form>
