@@ -9,7 +9,6 @@ import * as Constans from '../Utils/config';
 export default function Home() {
 
   const [tasks, setTasks] = useState("");
-  //const [tasks, setTask] = useState([]);
 
   useEffect(() => {
 
@@ -37,11 +36,11 @@ export default function Home() {
   const handleSubmit = async event => {
     event.preventDefault();
     const response = await fetch('/api/addTasks', {
-      methos: 'POST',
+      method: 'POST',
       headers : {
         "content-type" : 'application/json'
       },
-      body: JSON.stringify(task)
+      body: JSON.stringify(tasks)
     });
 
     if (! response.ok){
@@ -82,7 +81,7 @@ export default function Home() {
                               placeholder="Add Task Here ..."
                               onChange={handleChange}
                               value={tasks} />
-            <button className="flex-shrink-0 
+            <input className="flex-shrink-0 
                              bg-teal-500 
                              hover:bg-teal-700 
                              border-teal-500 
@@ -90,9 +89,9 @@ export default function Home() {
                              text-sm border-4 
                              text-white 
                              py-1 px-2 rounded" 
-                             type="button">
-                             add
-            </button>
+                             type="submit" 
+                             value="add Task" />
+               
           </div>
         </form>
 
@@ -107,23 +106,14 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Malcolm Lockyer</td>
-              <td>pending</td>
+            {tasks && tasks.length > 0 && tasks.map((task, index) => (
+              <tr key={index}>
+              <td>{index}</td>
+              <td>{task.desc}</td>
+              <td>{task.status === 0 ? "pending" : "finished"}</td>
+              <td>{index}</td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td>The Eagles</td>
-              <td>1972</td>
-              <td>1972</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Earth, Wind, and Fire</td>
-              <td>1975</td>
-              <td>1972</td>
-            </tr>
+            ))}
           </tbody>
         </table>
 
