@@ -8,7 +8,8 @@ import * as Constans from '../Utils/config';
 
 const Home = () => {
 
-  const [tasks, setTasks] = useState("");
+  const [task, setTask] = useState('');
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
 
@@ -56,7 +57,7 @@ const Home = () => {
 
   const handleChange = async event  => {
     //event.preventDefault();
-    setTasks(event.target.value);
+    setTask(event.target.value);
   }
 
   const changeTasksStatus = async taskId => {
@@ -100,7 +101,7 @@ const Home = () => {
                               name="task"
                               placeholder="Add Task Here ..."
                               onChange={handleChange}
-                              //value={tasks}
+                              value={task}
                                />
             <input className="flex-shrink-0 
                              bg-teal-500 
@@ -128,10 +129,10 @@ const Home = () => {
           </thead>
           <tbody>
             {
-            tasks.map((task, index) => (
-              
-              <tr key={index}>
-                <td>{index}</td>
+            tasks.map((task) => {
+              return(
+              <tr key={task.id}>
+                <td>{task.id}</td>
                 <td>{task.desc}</td>
                 <td>{task.status === 0 ? "pending" : "finished"}</td>
                 {/* <td>{task.status === 0 ? <button className="flex-shrink-0 
@@ -144,7 +145,7 @@ const Home = () => {
                               py-1 px-2 rounded" onClick={() => changeTasksStatus(index)}>Click me</button> : null}
                   </td> */}
             </tr>
-            ))}
+            )})}
           </tbody>
         </table>
 
