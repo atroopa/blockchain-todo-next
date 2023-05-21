@@ -5,6 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 
+![Screenshot from 2023-05-21 18-29-28](https://github.com/atroopa/blockchain-todo-next/assets/48874611/8777c30d-0137-4cd2-bec4-69d8911f6f43)
 
 ```bash
 npm run dev
@@ -13,6 +14,8 @@ yarn dev
 # or
 pnpm dev
 ```
+
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
