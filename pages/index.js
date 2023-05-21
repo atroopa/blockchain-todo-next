@@ -8,8 +8,8 @@ import * as Constans from '../Utils/config';
 
 export default function Home() {
 
-  //const [tasks, setTasks] = useState("");
-  const [tasks, setTask] = useState([]);
+  const [tasks, setTasks] = useState("");
+  //const [tasks, setTask] = useState([]);
 
   useEffect(() => {
 
