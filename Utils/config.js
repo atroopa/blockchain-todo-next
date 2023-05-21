@@ -1,7 +1,7 @@
 export const API_URL = "http://127.0.0.1:7545";
 // 0x6dAE04565cE8033553Eb4916a2c1Bc90C7Bf839B
-export const PRIVATE_KEY = "e4a1c030381cd28d1dc6b574a1d794224d4c77d23585a6a97e7eb7ee54878f87";
-export const contractAddress = "0x47d0e8376849DF890cEb524c5b15A153697dA479";
+export const PRIVATE_KEY = "0x39cf0934d9e05f29e4c4270acb7164a608b965f55efe61f1fa49d53d590d0b18";
+export const contractAddress = "0x40961a06CD3e5e567108f24d8D028cBb11143769";
 export const contractAbi = [
 	{
 		"inputs": [
@@ -107,4 +107,4 @@ export const contractAbi = [
 		"stateMutability": "view",
 		"type": "function"
 	}
-];
+]
