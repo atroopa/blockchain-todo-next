@@ -41,7 +41,7 @@ const Home = () => {
       headers : {
         "content-type" : 'application/json'
       },
-      body: JSON.stringify(tasks)
+      body: JSON.stringify(task)
     });
 
     if (! response.ok){
@@ -129,13 +129,13 @@ const Home = () => {
           </thead>
           <tbody>
             {
-            tasks.map((task) => {
+            tasks.map((task, index) => {
               return(
-              <tr key={task.id}>
-                <td>{task.id}</td>
+              <tr key={index}>
+                <td>{index}</td>
                 <td>{task.desc}</td>
                 <td>{task.status === 0 ? "pending" : "finished"}</td>
-                {/* <td>{task.status === 0 ? <button className="flex-shrink-0 
+                <td>{task.status === 0 ? <button className="flex-shrink-0 
                               bg-red-500 
                               hover:bg-red-700 
                               border-red-500 
@@ -143,7 +143,7 @@ const Home = () => {
                               text-sm border-4 
                               text-white 
                               py-1 px-2 rounded" onClick={() => changeTasksStatus(index)}>Click me</button> : null}
-                  </td> */}
+                  </td>
             </tr>
             )})}
           </tbody>
